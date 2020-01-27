@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html>
+<html>
+
+<body><script type="text/javascript" ></script>
+<script src="https://unpkg.com/vue"></script>   
+      <link rel="stylesheet" type="text/css" href="cc1css.css">
+    
+
+    <div id="searchFilter">
+    <h1>login </h1>
+    
+    
+    
+    
+<!--       <link rel="stylesheet" type="text/css" href="cc1css.css">-->
+
+
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+
+
+
+
+    
+   <center><div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div></center>
+ <br> <br> <br>
+        
+     
+
+<!-- Search -->
+
+
+
+<!--<input type="text" id="myInput" placeholder="collection name" v-model='newdbcollection'>-->
+<!--
+<button v-on:click='createCollection' class=" button button1" >test</button>
+    
+-->
+    
+<center>
+<input type="email" id="myInput" placeholder="Email" v-model='topic'>
+    
+    <br>     <br> 
+<input type="password" id="myInput" placeholder="Password" v-model='location'>
+<br><br>
+    <section>
+  <h3>Who are you?</h3>
+        
+         <br>    
+        
+  <select v-model="selectOne">
+    <option>student</option>
+    <option selected>provider</option>
+
+  </select>
+
+  <span>you are a {{ selectOne }}</span>
+         <br>     <br> 
+</section>
+
+    <br>    
+<button v-on:click='addCourse' class=" button button1" >login</button>
+    <p id="demo">
+        
+        
+           <p id="err">
+               
+    </center>
+<!--
+<h3>Your Reviews</h3>
+<table id="myTable">
+    <tr class="header">
+      <th >email</th>
+      <th >password</th>
+
+    </tr>
+    <tr v-for='course in dbTable' class='course'>
+      <td >{{course.topic}}</td>
+      <td >{{course.location}}</td>
+-->
+
+       
+
+<!--</table>-->
+    
+    
+
+    <br>     <br>   
+ 
+
+   
+    
+
+    
+  
+<br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+</div>
+  
+<script>
+    
+
+    
+const API = "http://localhost:3000"; 
+
+     Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='registerlastest.html' v-bind:class="{active: page==='home'}">Register</a>
+
+<a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
+
+<a href='review.html' v-bind:class="{active: page==='userpage'}">Review</a>
+
+
+<a href='index.html' v-bind:class="{active: page==='course'}">Login</a>
+</div>`
+})
+    
+var courses = [
+    
+{ 'topic': 'change', 'location': 'all', 'price': 100, 'rating': 1 },
+
+]
+    
+    
+    ////////
+
+
+// fetch('/collections/messages', {
+//   headers: {  "Content-Type": "application/json; charset=utf-8" },
+//   method: 'POST',
+//   body: ({ username: 'one', password: 'example',
+  
+//   })
+// })
+    
+    
+
+
+//function getUser(name){
+// fetch(`http://localhost:3000/collections/messages`)
+//  .then(function(response) {
+//    return response.json();
+//  })
+//  .then(function(json) {
+//    console.log(json);
+//  });
+//};
+//
+////get user data
+//getUser('yourUsernameHere');
+
+
+
+//courses.pop()
+
+   localStorage.setItem("courses", JSON.stringify(courses));    
+
+var courses = JSON.parse(localStorage.getItem("courses"));
+  
+var searchApp = new Vue({
+el: '#searchFilter',
+
+data: {
+checkto: true,
+term: '',
+bucket:[],
+dbTable:[],
+    
+    page:'',
+     selectOne: '',
+stevetable:[],
+providerTable:[],
+userLocations: [],
+newdbcollection:'', //not using delete
+dbcollection:'',
+    
+email: '', //using
+
+password: '',    //using
+    
+//test start 
+Providerreview:'',
+topic:'',
+location:'',
+price:'',
+ratingg:'',
+provider:'',  
+//test end
+updatedTopic:'',
+updatedLocation:'',
+updatedPrice:'',
+updatedRating:'',
+itemID:'',
+},
+
+methods: {
+reset: function () {
+this.userLocations = [];
+    
+},
+   
+    
+    onSubmit: function() {
+  var use = 'ds'  
+
+// 
+var users = '';
+var newEmail = this.email;
+    var useablepasword = this.password
+if (localStorage.getItem('users')) { // 'users' is an array of objects
+users = JSON.parse(localStorage.getItem('users'));
+};
+    
+      
+    if (!newEmail ){
+        
+        alert('Recheck details');
+        return;
+    }
+    var string = newEmail
+var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
+var test = exp.test(string);
+       if (test === false){
+        document.getElementById("demo").innerHTML = "Error";
+           return;
+       }
+
+    
+    
+    
+if (users) {
+if (users.some(function (user) { return user.email === newEmail })) {
+alert('Email already exists!');
+return;
+}
+   /// add here  
+    
+      fetch(API+'/users/'+'register', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+  body: JSON.stringify({
+        topic: this.email,
+        location: this.password,
+
+    })
+  })
+
+    
+}},
+    
+     
+    
+    
+//not currently using 25/01
+    
+createCollection: function(){
+
+  fetch(API+'/createCollection', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+  body: JSON.stringify({
+        collection: this.newdbcollection})
+  }).then((res)=>{
+      console.log(res)
+  }).catch((err)=>{
+      console.log(err)
+  })
+},
+    
+    
+   
+    
+    
+    
+    
+    
+
+addCourse: function() {
+
+     if (!this.topic ){
+        
+        alert('Recheck details');
+        return;
+    }
+    
+      var string = this.topic
+var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
+var test = exp.test(string);
+       if (test === false){
+        document.getElementById("demo").innerHTML = "Error";
+           return;
+       }
+    
+   //working up to here ...................... dont destroy  
+    
+    
+    users = JSON.parse(localStorage.getItem('users'));
+   
+
+   
+ 
+    
+    
+    
+    
+  fetch(API+'/users/'+'register', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+  body: JSON.stringify({
+        topic: this.topic,
+        location: this.location,
+       type: this.selectOne,
+      
+   
+    
+    })
+      
+      
+  }).then((res)=>{
+    window.location.reload()
+  }).catch((err)=>{
+      console.log(err)
+  })
+},
+
+
+catch(err) {
+  document.getElementById("err").innerHTML = err.message;
+}
+},
+    
+    
+created() {
+//fetching all courses from database on page load
+    
+    
+    
+fetch(API+'/users/'+'register', {
+  method:'GET',
+
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+}).then(res => res.json())
+  .then(jsonData => {
+          jsonData.forEach(element => {
+            let newItem = {
+            id: element._id,
+           topic: element.topic,
+           location: element.location
+          
+                
+        
+        };
+
+        this.dbTable.push(newItem);
+       
+          });
+  })
+    .catch((err) => {
+    console.log(err)
+})
+},
+
+  
+});
+
+</script>
+<script> src="app.js" </script>
+
+
+</body>
+</html>
