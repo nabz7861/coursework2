@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<body><script type="text/javascript" ></script>
+<script src="https://unpkg.com/vue"></script>    
+    <h1>Login</h1>
+    
+<!--       <link rel="stylesheet" type="text/css" href="cc1css.css">-->
+
+
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+
+<div id="searchFilter">
+
+     
+
+<!-- Search -->
+
+
+
+<!--<input type="text" id="myInput" placeholder="collection name" v-model='newdbcollection'>-->
+<!--
+<button v-on:click='createCollection' class=" button button1" >test</button>
+    
+-->
+    
+
+
+<input type="text" id="myInput" placeholder="topic" v-model='topic'>
+<input type="text" id="myInput" placeholder="location" v-model='location'>
+
+<button v-on:click='addCourse' class=" button button1" >login</button>
+
+<h3>Your Reviews</h3>
+<table id="myTable">
+    <tr class="header">
+      <th >Topic</th>
+      <th >Location</th>
+      <th >Rating</th>  
+      <th >Update</th>
+    </tr>
+    <tr v-for='course in dbTable' class='course'>
+      <td >{{course.topic}}</td>
+      <td >{{course.location}}</td>
+      <td >{{course.rating}}</td>  
+       
+
+</table>
+
+    <br>     <br>   
+ 
+
+   
+    
+
+    
+  
+<br><br><br><br><br><br>
+    <br><br><br><br><br><br>
+
+</div>
+  
+<script>
+
+const API = "http://localhost:3000"; 
+
+var courses = [
+    
+{ 'topic': 'change', 'location': 'all', 'price': 100, 'rating': 1 },
+
+]
+    
+    
+    ////////
+
+
+// fetch('/collections/messages', {
+//   headers: {  "Content-Type": "application/json; charset=utf-8" },
+//   method: 'POST',
+//   body: ({ username: 'one', password: 'example',
+  
+//   })
+// })
+    
+    
+
+
+//function getUser(name){
+// fetch(`http://localhost:3000/collections/messages`)
+//  .then(function(response) {
+//    return response.json();
+//  })
+//  .then(function(json) {
+//    console.log(json);
+//  });
+//};
+//
+////get user data
+//getUser('yourUsernameHere');
+
+
+
+//courses.pop()
+
+   localStorage.setItem("courses", JSON.stringify(courses));    
+
+var courses = JSON.parse(localStorage.getItem("courses"));
+  
+var searchApp = new Vue({
+el: '#searchFilter',
+
+data: {
+checkto: true,
+term: '',
+bucket:[],
+dbTable:[],
+stevetable:[],
+providerTable:[],
+userLocations: [],
+newdbcollection:'',
+dbcollection:'',
+//test start
+Providerreview:'',
+topic:'',
+location:'',
+price:'',
+ratingg:'',
+provider:'',  
+//test end
+updatedTopic:'',
+updatedLocation:'',
+updatedPrice:'',
+updatedRating:'',
+itemID:'',
+},
+
+methods: {
+reset: function () {
+this.userLocations = [];
+    
+},
+    
+     
+    
+    
+
+    
+createCollection: function(){
+
+  fetch(API+'/createCollection', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+  body: JSON.stringify({
+        collection: this.newdbcollection})
+  }).then((res)=>{
+      console.log(res)
+  }).catch((err)=>{
+      console.log(err)
+  })
+},
+
+addCourse: function() {
+
+  fetch(API+'/collections/'+'courses', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+  body: JSON.stringify({
+        topic: this.topic,
+        location: this.location,
+   
+        rating: this.ratingg,
+    })
+  }).then((res)=>{
+    window.location.reload()
+  }).catch((err)=>{
+      console.log(err)
+  })
+},
+
+
+
+},
+    
+    
+created() {
+//fetching all courses from database on page load
+fetch(API+'/collections/'+'courses', {
+  method:'GET',
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+}).then(res => res.json())
+  .then(jsonData => {
+          jsonData.forEach(element => {
+            let newItem = {
+            id: element._id,
+           topic: element.topic,
+           location: element.location,
+           price: element.price,
+           rating: element.rating
+                
+        
+        };
+
+        this.dbTable.push(newItem);
+       
+          });
+  })
+    .catch((err) => {
+    console.log(err)
+})
+},
+
+  
+});
+
+</script>
+
+
+</body>
+</html>

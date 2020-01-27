@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+  <title>My first Vue app</title>
+<!--    <link rel="stylesheet" type="text/css" href="cc1css.css">-->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+<body>
+
+<div id="app2"><myheader v-bind:signedin=signedin></myheader></div>
+    
+   <center><div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div></center>
+ 
+    
+<h1>Sign up </h1> 
+
+
+      <p id="demo">
+  <center>  <form action="/" method="post">
+<h2>Students/Parents </h2>
+<label for="email"> <h3>Email:</h3> </label>
+<input required type="email" id="email" v-model='email' >
+<br><br>
+<label for="Name"><h3>Name:</h3> </label>
+<input required type="name" id="name" v-model='name'>
+<br><br>
+<label for="password"><h3>Password:</h3> </label>
+<input required type="password" id="password" v-model='password'>
+<br><br>
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+      <br>
+      </form> </center>
+    <br>
+   <center><form  id="signupstudent"  class="fo">
+       
+<h2>Service Providers</h2>
+<label for="email"> <h3>Email:</h3> </label>
+<input required type="email" id="emailprovider" v-model='emailprovider'>
+<br><br>
+
+<label for="Name"> <h3>Name:</h3> </label>
+<input required type="name" id="nameprovider" v-model='nameprovider'>
+<br><br>
+<label for="password"> <h3>Password:</h3> </label>
+<input required type="password" id="passwordprovider" v-model='passwordprovider'>
+<br><br>
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+       
+       <br>
+</form> </center>
+    
+
+<!--    to here-->
+<!--
+<h1>Sign up</h1>
+        <br>
+                
+
+
+<label for="email">Email: </label>
+<input required type="email" id="email" v-model='email'>
+<br><br>
+         
+<label for="password">Password: </label>
+<input required type="password" id="password" v-model='password'>
+<br><br>
+
+
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+              
+</form>
+-->
+<!--
+            
+        </div>
+        
+      SERVICE  second TAB
+        <div v-if="activetab === 2" class="tabcontent">
+            
+<h1>Sign up</h1>
+        <br>
+     <div     >      
+
+
+<label for="email">Email: </label>
+<input required type="email" id="serviceemail" v-model='serviceemail'>
+<br><br>
+         
+<label for="password">Password: </label>
+<input required type="password" id="servicepassword" v-model='servicepassword'>
+<br><br>
+
+
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+              
+        </div>
+      
+    </div>
+  
+</div> 
+-->
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script>
+    
+
+Vue.component('myheader', {
+props: ['signedin'],
+template: `<div>
+<a href='c2signup.html' v-if='!signedin'>sign up</a>
+<a href='c2signin.html' v-if='!signedin'>sign in</a>
+<a href='signout.html' v-if='signedin'>sign out</a>
+</div>`,
+})  
+    
+       
+Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='home.html' v-bind:class="{active: page==='home'}">home</a>
+
+<a href='html1.html' v-bind:class="{active: page==='userpage'}">alphabetically</a>
+
+<a href='n2.html' v-bind:class="{active: page==='userpage'}">Userpage</a>
+
+<a href='sdsdfsd.html' v-bind:class="{active: page==='userpage'}">add to database</a>
+
+<a href='hendon.html' v-bind:class="{active: page==='userpage'}">courses</a>
+
+<a href='exper.html' v-bind:class="{active: page==='course'}">filter</a>
+</div>`
+})
+    
+ var vue3 = new Vue({
+el: '#navigation',
+data: {'page': 'home'}
+})
+     validuser = JSON.parse(localStorage.getItem('loggeduser'));
+  
+        if (validuser)  {
+     var vue1 = new Vue({
+el: '#app2',
+data: {
+'signedin': true
+}
+})
+
+           
+  }
+    
+    
+      if (!validuser)  {
+   var vue2 = new Vue({
+el: '#app2',
+data: {
+'signedin': false
+}
+})}
+
+var signupApp = new Vue({
+el: '#signup',
+data: {
+email: '',
+name: '',
+password: '',
+},
+methods: {
+onSubmit: function() {
+  var use = 'ds'  
+
+// 
+var users = '';
+var newEmail = this.email;
+    var useablepasword = this.password
+if (localStorage.getItem('users')) { // 'users' is an array of objects
+users = JSON.parse(localStorage.getItem('users'));
+};
+    
+      
+    if (!newEmail ){
+        
+        alert('Recheck details');
+        return;
+    }
+    var string = newEmail
+var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
+var test = exp.test(string);
+       if (test === false){
+        document.getElementById("demo").innerHTML = "Error";
+           return;
+       }
+
+    
+    
+    
+if (users) {
+if (users.some(function (user) { return user.email === newEmail })) {
+alert('Email already exists!');
+return;
+}
+    
+users.push({ 'email': newEmail, 'password': this.password });
+localStorage.setItem('users', JSON.stringify(users));
+}
+else {
+users = [{ 'email': newEmail, 'password': this.password }];
+localStorage.setItem('users', JSON.stringify(users));
+}}}})
+
+
+
+// for providers
+var signupnew = new Vue({
+el: '#signupstudent',
+data: {
+emailprovider: '',
+nameprovider: '',
+passwordprovider: '',
+   
+},
+methods: {
+onSubmit: function() {
+    
+
+// 
+var userssp = '';
+var inputemail = this.emailprovider;
+var localpass = this.passwordprovider;
+var localname = this.nameprovider;
+    
+if (localStorage.getItem('userssp')) { // 'users' is an array of objects
+userssp = JSON.parse(localStorage.getItem('userssp'));
+   
+    
+};
+    
+    
+  if (!inputemail ){
+        
+        alert('Recheck details');
+        return;
+    }
+    var string = inputemail
+var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
+var test = exp.test(string);
+       if (test === false){
+        document.getElementById("demo").innerHTML = "Error";
+           return;
+       }   
+    
+    
+    //i check if any users, and if users already exist, Alert
+if (userssp) {
+if (userssp.some(function(usern) {return usern.email === inputemail})) {
+alert('Email already exists!' );
+    
+return;
+}
+    //push to server
+userssp.push({'email': inputemail, 'name': localname, 'password': localpass});
+localStorage.setItem('userssp', JSON.stringify(userssp));
+  
+}
+    
+    
+else {
+userssp = [{'email': inputemail, 'name': localname, 'password': localpass}];
+localStorage.setItem('userssp', JSON.stringify(userssp));
+} 
+}
+}})
+
+
+    
+//
+//new Vue({
+//    el: '#tabs',
+//    data: { activetab: 1 },
+//});
+</script>
+
+</body>
+</html>

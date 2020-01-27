@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<body><script type="text/javascript" ></script>
+<script src="https://unpkg.com/vue"></script>    
+    <h1>Search</h1>
+    
+<!--       <link rel="stylesheet" type="text/css" href="cc1css.css">-->
+
+
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+
+<div id="searchFilter">
+
+     
+
+<!-- Search -->
+<input type="text" id="myInput" placeholder="Search" v-model='term'>
+<button v-on:click='reset' class="button button1">Reset</button>
+<button v-on:click='low2high' class="button button1" >Price (Assending)</button>
+ <button v-on:click='hightolow' class="button button1" >Price (Dessending</button>
+     <button v-on:click='rating' class=" button button1" >Ratings</button>
+    
+        
+    <button v-on:click='alphabeticallyhigh2low' class=" button button1" >Alphabetically (Desending)</button>
+    
+        <button v-on:click='alphabeticallyhightolow' class=" button button1" >Alphabetically (assending)</button>
+    
+    <h2>Filter</h2>
+<!-- filter -->
+<select multiple v-model='userLocations'>
+    <option v-for='location in locations'>
+    {{location}}
+    </option>
+</select>
+
+<br><br>
+    <br><br>
+<h2>Course Table</h2>
+<table id="myTable">
+  <tr class="header">
+    <th >Topic</th>
+    <th >Location</th>
+    <th >Price</th>
+    <th >Rating</th>
+ 
+  </tr>
+  <tr v-for='course in results' class='course'>
+    <td>{{course.topic}}</td>
+    <td>{{course.location}}</td>
+    <td>{{course.price}}</td>
+    <td>{{course.rating}}</td>
+      
+    <td><button v-on:click='add2bucket(course.topic,course.location,course.price,course.rating)' class="button1">Add to Basket</button>
+<!--       <button @click="remove(index)">&times;</button>-->
+      </td>
+      
+  </tr>
+</table>
+<br/>
+
+<h2> Basket </h2>
+<table  id="content" id="mytable">
+    <tr class="basket">
+      <th style="width:20%;">Topic</th>
+      <th style="width:20%;">Location</th>
+      <th style="width:20%;">Price</th>
+      <th style="width:20%;">Ratiing</th>
+
+    </tr>
+    <tr v-for='course in bucket' class='course'>
+      <td>{{course.topic}}</td>
+      <td>{{course.location}}</td>
+      <td>{{course.price}}</td>
+      <td>{{course.rating}}</td>
+      <td><button v-on:click='' class="button1">proceed to checkout</button></td>
+    </tr>
+  </table>
+<br/>
+
+
+</div>
+  
+<script>
+
+     
+     
+var courses = [
+{ 'topic': 'math', 'location': 'hendon', 'price': 100, 'rating': 1 },
+{ 'topic': 'math', 'location': 'colindale', 'price': 80,'rating': 4 },
+{ 'topic': 'math', 'location': 'brent cross', 'price': 90, 'rating': 5 },
+{ 'topic': 'math', 'location': 'golders green', 'price': 120, 'rating': 4 },
+{ 'topic': 'english', 'location': 'hendon', 'price': 110, 'rating': 4 },
+{ 'topic': 'english', 'location': 'colindale', 'price': 90, 'rating': 4 },
+{ 'topic': 'english', 'location': 'brent cross', 'price': 90, 'rating': 1  },
+{ 'topic': 'english', 'location': 'golders green', 'price': 130, 'rating': 3 },
+{ 'topic': 'piano', 'location': 'hendon', 'price': 120, 'rating': 5  },
+{ 'topic': 'piano', 'location': 'golders green', 'price': 140,'rating': 0  },
+{ 'topic': 'music', 'location': 'hendon', 'price': 10, 'rating': 1 },
+{ 'topic': 'Music', 'location': 'colindale', 'price': 87,'rating': 4 },
+{ 'topic': 'music', 'location': 'brent cross', 'price': 93, 'rating': 5 },
+{ 'topic': 'music', 'location': 'golders green', 'price': 133, 'rating': 4 },
+{ 'topic': 'it', 'location': 'hendon', 'price': 113, 'rating': 4 },
+{ 'topic': 'it', 'location': 'colindale', 'price': 93, 'rating': 4 },
+{ 'topic': 'it', 'location': 'brent cross', 'price': 92, 'rating': 1  },
+{ 'topic': 'it', 'location': 'golders green', 'price': 154, 'rating': 3 },
+{ 'topic': 'art', 'location': 'hendon', 'price': 154, 'rating': 5  },
+{ 'topic': 'art', 'location': 'golders green', 'price': 145,'rating': 0  }
+    
+    ////
+    
+    
+    
+//add provider heading to array, then add the various providers, then in the 
+    // in the providers page, chnage code search to to the providers name.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ////////
+]
+
+
+fetch('/collections/messages', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'POST',
+  body: ({ username: 'one', password: 'example',
+  
+  })
+})
+
+
+//function getUser(name){
+// fetch(`http://localhost:3000/collections/messages`)
+//  .then(function(response) {
+//    return response.json();
+//  })
+//  .then(function(json) {
+//    console.log(json);
+//  });
+//};
+//
+////get user data
+//getUser('yourUsernameHere');
+
+
+
+//courses.pop()
+
+   localStorage.setItem("courses", JSON.stringify(courses));    
+
+var courses = JSON.parse(localStorage.getItem("courses"));
+  
+var searchApp = new Vue({
+el: '#searchFilter',
+data: {
+checkto: true,
+term: '',
+bucket:[],
+userLocations: []
+},
+methods: {
+reset: function () {
+this.userLocations = [];
+    
+},
+    
+      alphabeticallyhightolow: function() {
+    courses.sort(function(a, b){
+        const bandA = a.topic.toLowerCase();
+    const bandB = b.topic.toLowerCase();
+        
+
+    let comparison = 0;
+    if (bandB > bandA) {
+        comparison = 1;
+    } else if (bandB < bandA) {
+        comparison = -1;
+    }
+    return comparison;
+});
+        
+this.userLocations = [];
+},
+    
+    alphabeticallyhigh2low: function() {
+    courses.sort(function(a, b){
+        const bandA = a.topic.toLowerCase();
+    const bandB = b.topic.toLowerCase();
+        
+
+    let comparison = 0;
+    if (bandA > bandB) {
+        comparison = 1;
+    } else if (bandA < bandB) {
+        comparison = -1;
+    }
+    return comparison;
+});
+        
+this.userLocations = [];
+},
+    
+rating: function() {
+    courses.sort(function(a, b){
+        const bandA = a.rating;
+    const bandB = b.rating;
+
+    let comparison = 0;
+    if (bandB > bandA) {
+        comparison = 1;
+    } else if (bandB < bandA) {
+        comparison = -1;
+    }
+    return comparison;
+});
+this.userLocations = [];
+},
+    
+hightolow: function() {
+    courses.sort(function(a, b){
+        const bandA = a.price;
+    const bandB = b.price;
+
+    let comparison = 0;
+    if (bandB > bandA) {
+        comparison = 1;
+    } else if (bandB < bandA) {
+        comparison = -1;
+    }
+    return comparison;
+});
+this.userLocations = [];
+},
+
+low2high: function() {
+    courses.sort(function(a, b){
+        const bandA = a.price;
+    const bandB = b.price;
+
+    let comparison = 0;
+    if (bandA > bandB) {
+        comparison = 1;
+    } else if (bandA < bandB) {
+        comparison = -1;
+    }
+    return comparison;
+});
+this.userLocations = [];
+},
+
+add2bucket: function(topic,location,price,rating) {
+        let newItem = {
+           topic: topic,
+           location: location,
+           price: price,
+           rating: rating
+        };
+
+        this.bucket.push(newItem);
+}
+
+},
+computed: {
+locations: function () {
+// update option list
+return [...new Set(this.results.map(x => x.location))]
+},
+results: function () {
+return courses.filter(course => {
+// search condition
+var searchCourse = course.topic.includes(this.term);
+// filter condition
+var filterCourse = this.userLocations.length == 0 ||
+this.userLocations.includes(course.location);
+// combine the result
+return searchCourse && filterCourse;
+})
+},
+},
+});
+
+</script>
+
+
+</body>
+</html>
