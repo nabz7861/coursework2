@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html>
+<body>
+<Script>
+fetch('http://localhost:3000').then(
+function(response) {
+response.text().then(
+function(text) {
+alert(text);
+});
+});
+    
+    </Script>
+    
+    
+    
+</body>
+</html>
 
-<body><script ></script>
+
+<body><script type="text/javascript" ></script>
 <script src="https://unpkg.com/vue"></script>    
     <h1>Review</h1>
     
@@ -18,7 +37,7 @@
 
 
 
-<!--<inpu type="text" id="myInput" placeholder="collection name" v-model='newdbcollection'>-->
+<!--<input type="text" id="myInput" placeholder="collection name" v-model='newdbcollection'>-->
 <!--
 <button v-on:click='createCollection' class=" button button1" >test</button>
     
@@ -111,6 +130,8 @@
   
 <script>
 
+    
+    
 const API = "http://localhost:3000"; 
 
 var courses = [
