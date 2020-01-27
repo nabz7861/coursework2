@@ -73,6 +73,58 @@ app.post('/collections/:collectionName', (req, res, next) => {
     });
 })
 
+// example
+app.post('/addcourses/:collectionName', (req, res, next) => {
+    var collectionName = req.params.collectionName
+
+    
+    MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+
+  var myobj = [
+{ 'topic': 'math', 'location': 'colindale', 'price': 80,'rating': 43, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'math', 'location': 'brent cross', 'price': 90, 'rating': 52, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'math', 'location': 'golders green', 'price': 120, 'rating': 43, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'english', 'location': 'hendon', 'price': 110, 'rating': 42, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'english', 'location': 'colindale', 'price': 90, 'rating': 42, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'english', 'location': 'brent cross', 'price': 90, 'rating': 11, 'Provider': 'john', 'Providerreview': 4  },
+{ 'topic': 'english', 'location': 'golders green', 'price': 130, 'rating': 35, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'piano', 'location': 'hendon', 'price': 120, 'rating': 55, 'Provider': 'john', 'Providerreview': 4  },
+{ 'topic': 'piano', 'location': 'golders green', 'price': 140,'rating': 34, 'Provider': 'john', 'Providerreview': 4  },
+{ 'topic': 'music', 'location': 'hendon', 'price': 10, 'rating': 43, 'Provider': 'john', 'Providerreview': 4 },
+{ 'topic': 'Music', 'location': 'colindale', 'price': 87,'rating': 43, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'music', 'location': 'brent cross', 'price': 93, 'rating': 54, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'music', 'location': 'golders green', 'price': 133, 'rating': 76, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'it', 'location': 'hendon', 'price': 113, 'rating': 76, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'it', 'location': 'colindale', 'price': 93, 'rating': 88, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'it', 'location': 'brent cross', 'price': 92, 'rating': 87, 'Provider': 'steve', 'Providerreview': 5  },
+{ 'topic': 'it', 'location': 'golders green', 'price': 154, 'rating': 98, 'Provider': 'steve', 'Providerreview': 5 },
+{ 'topic': 'art', 'location': 'hendon', 'price': 154, 'rating': 76, 'Provider': 'steve', 'Providerreview': 5  }
+  ];
+        
+  dbo.collection("courses").insertMany(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("Number of documents inserted: " + res.insertedCount);
+    db.close();
+  });
+});
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+})
+
 
 
 
