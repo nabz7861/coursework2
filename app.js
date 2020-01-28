@@ -11,3 +11,4 @@ An image will appear here in 3 seconds:
     document.body.appendChild(img);
   }, 3000);
 </script>
+
