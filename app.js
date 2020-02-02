@@ -10,7 +10,7 @@ var template = "<article>\n\
 	\n\
 	</ul>\n\
 </article>";
-var content = '';
+var catched = '';
 for(var i=0; i<courses.length; i++) {
 	var entry = template.replace(/POS/g,(i+1))
 		.replace(/SLUG/g,courses[i].slug)
@@ -20,9 +20,9 @@ for(var i=0; i<courses.length; i++) {
 		.replace(/rating/g,courses[i].rating)
 		.replace(/locate/g,courses[i].locate);
 	entry = entry.replace('<a href=\'http:///\'></a>','-');
-	content += entry;
+	catched += entry;
 };
-document.getElementById('content').innerHTML = content;
+document.getElementById('catched').innerHTML = catched;
 
 // Registering Service Worker
 if('serviceWorker' in navigator) {
