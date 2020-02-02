@@ -16,10 +16,7 @@
 </head>
 <body>
     
-       <center><div id="navigation">
-<toplinks v-bind:page=page></toplinks>
-</div></center>
- <br> <br> <br>
+
     
     <script>
         Vue.component('toplinks', {
@@ -37,7 +34,10 @@ template: `<div>
 
 
 <main>
-	
+	       <center><div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div></center>
+ <br> <br> <br>
 
 	<button id="notifications">notifications</button>
 	<section id="content"></section>
