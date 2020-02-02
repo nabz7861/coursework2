@@ -3,24 +3,24 @@ self.importScripts('data/courses.js');
 // Files to cache
 var cacheName = 'firstcatch';
 var appShellFiles = [
-  '/example/',
-  '/example/index.html',
-  '/example/app.js',
-  '/example/style.css',
-  '/example/fonts/graduate.eot',
-  '/example/fonts/graduate.ttf',
-  '/example/fonts/graduate.woff',
-  '/example/favicon.ico',
-  '/example/images/icon.png',
-  '/example/images/bg.png',
-  '/example/otherfavicons/icon-32.png',
-  '/example/otherfavicons/icon-64.png',
-  '/example/otherfavicons/icon-96.png',
-  '/example/otherfavicons/icon-128.png',
-  '/example/otherfavicons/icon-168.png',
-  '/example/otherfavicons/icon-192.png',
-  '/example/otherfavicons/icon-256.png',
-  '/example/otherfavicons/icon-512.png'
+  '/coursework2/',
+  '/coursework2/index.html',
+  '/coursework2/app.js',
+  '/coursework2/style.css',
+  '/coursework2/fonts/graduate.eot',
+  '/coursework2/fonts/graduate.ttf',
+  '/coursework2/fonts/graduate.woff',
+  '/coursework2/favicon.ico',
+  '/coursework2/images/icon.png',
+  '/coursework2/images/bg.png',
+  '/coursework2/otherfavicons/icon-32.png',
+  '/coursework2/otherfavicons/icon-64.png',
+  '/coursework2/otherfavicons/icon-96.png',
+  '/coursework2/otherfavicons/icon-128.png',
+  '/coursework2/otherfavicons/icon-168.png',
+  '/coursework2/otherfavicons/icon-192.png',
+  '/coursework2/otherfavicons/icon-256.png',
+  '/coursework2/otherfavicons/icon-512.png'
     
 
     

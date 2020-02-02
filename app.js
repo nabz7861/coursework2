@@ -26,7 +26,7 @@ document.getElementById('content').innerHTML = content;
 
 // Registering Service Worker
 if('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/example/sw.js');
+	navigator.serviceWorker.register('/coursework2/sw.js');
 };
 
 // Requesting permission for Notifications after clicking on the button
