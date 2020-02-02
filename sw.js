@@ -13,14 +13,14 @@ var appShellFiles = [
   '/coursework2/favicon.ico',
   '/coursework2/images/icon.png',
   '/coursework2/images/bg.png',
-  '/coursework2/otherfavicons/icon-32.png',
-  '/coursework2/otherfavicons/icon-64.png',
-  '/coursework2/otherfavicons/icon-96.png',
-  '/coursework2/otherfavicons/icon-128.png',
-  '/coursework2/otherfavicons/icon-168.png',
-  '/coursework2/otherfavicons/icon-192.png',
-  '/coursework2/otherfavicons/icon-256.png',
-  '/coursework2/otherfavicons/icon-512.png'
+  '/coursework2/icons/icon-32.png',
+  '/coursework2/icons/icon-64.png',
+  '/coursework2/icons/icon-96.png',
+  '/coursework2/icons/icon-128.png',
+  '/coursework2/icons/icon-168.png',
+  '/coursework2/icons/icon-192.png',
+  '/coursework2/icons/icon-256.png',
+  '/coursework2/icons/icon-512.png'
     
 
     
