@@ -26,7 +26,7 @@ document.getElementById('content').innerHTML = content;
 
 // Registering Service Worker
 if('serviceWorker' in navigator) {
-	navigator.serviceWorker.register('/coursework2/sw.js');
+	navigator.serviceWorker.register('/example/sw.js');
 };
 
 // Requesting permission for Notifications after clicking on the button
@@ -44,7 +44,7 @@ function randomNotification() {
 	var randomItem = Math.floor(Math.random()*courses.length);
 	var notifTitle = courses[randomItem].name;
 	var notifBody = 'This will cost you '+courses[randomItem].price+'.';
-	var notifImg = 'data/img/'+games[randomItem].slug+'.jpg';
+	var notifImg = 'data/img/'+courses[randomItem].slug+'.jpg';
 	var options = {
 		body: notifBody,
 		icon: notifImg
