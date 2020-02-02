@@ -124,4 +124,80 @@ body {
 
 
 
+/*addded*/
+
+
+
+a {
+	text-decoration: none;
+	color: #b12a34;
+}
+header {
+	background: #2d2d2d url(img/bg.png) repeat;
+	border-top: 0.2em solid #a52730;
+	border-bottom: 0.2em solid #fff;
+}
+header p {
+	width: 90%;
+	margin: 1em auto;
+	position: relative;
+}
+header img {
+	display: block;
+	width: 50%;
+	min-width: 150px;
+	max-width: 295px;	
+}
+.description {
+	text-align: center;
+	padding: 1em;
+}
+button {
+	display: block;
+	margin: 0 auto 2em;
+}
+main {
+	width: 100%;
+	background: #fafafa;
+}
+main a:hover {
+	text-decoration: none;
+	border-bottom: 1px solid #b12a34;
+}
+main p {
+	padding-bottom: 1.5em;
+}
+main ul {
+	padding: 0.2em;
+}
+main li {
+	line-height: 1.4em;
+	margin-left: 1em;
+}
+main img {
+	float: right;
+	width: 30%;
+	min-width: 80px;
+	max-width: 160px;
+	padding-bottom: 1em;
+}
+article {
+	border-top: 0.1em solid #acabab;
+	padding: 1em;
+}
+article img[data-src] {
+	filter: blur(0.2em);
+}
+article img {
+	filter: blur(0em);
+	transition: filter 0.5s;
+}
+footer {
+	background: #2d2d2d url(img/bg.png) repeat;
+	border-top: 0.2em solid #fff;
+	border-bottom: 0.2em solid #a52730;
+}
+
+
+
 
