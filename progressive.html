@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	
-<script src="https://unpkg.com/vue"></script>   
+
 	<meta name="theme-color" content="#B17A34">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:image" content="icons/icon-512.png">
@@ -14,89 +14,9 @@
 	<script src="app.js" defer></script>
 </head>
 <body>
-    
-    
-    
-    
-<div id="searchFilter">
-    
-    
-           <center><div id="navigation">
-<toplinks v-bind:page=page></toplinks>
-</div></center>
- <br> <br> <br>
-    
-    <script>
-        
-        
-        
-        
-             Vue.component('toplinks', {
-props: ['page'],
-template: `<div>
-<a href='registerlastest.html' v-bind:class="{active: page==='home'}">Register</a>
-<a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
-<a href='review.html' v-bind:class="{active: page==='userpage'}">Review</a>
-<a href='index.html' v-bind:class="{active: page==='course'}">Login</a>
-<a href='progressive.html' v-bind:class="{active: page==='course'}">catched</a>
-</div>`
-})
-    
-      var searchApp = new Vue({
-el: '#searchFilter',
 
-data: {
-checkto: true,
-term: '',
-bucket:[],
-dbTable:[],
-    
-    page:'',
-     selectOne: '',
-stevetable:[],
-providerTable:[],
-userLocations: [],
-newdbcollection:'', //not using delete
-dbcollection:'',
-    
-email: '', //using
 
-password: '',    //using
-    
-//test start 
-Providerreview:'',
-topic:'',
-location:'',
-price:'',
-ratingg:'',
-provider:'',  
-//test end
-updatedTopic:'',
-updatedLocation:'',
-updatedPrice:'',
-updatedRating:'',
-itemID:'',
-},
-
-methods: {
-reset: function () {
-this.userLocations = [];
-    
-},
-            });
-
-        
-        
-        
-        
-
-    
-    </script>
-</div>
 <main>
-    
-
-        
 	
 
 	<button id="notifications">notifications</button>
