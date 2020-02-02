@@ -32,7 +32,7 @@
         
         
              Vue.component('toplinks', {
-
+props: ['page'],
 template: `<div>
 <a href='registerlastest.html' v-bind:class="{active: page==='home'}">Register</a>
 <a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
@@ -42,7 +42,17 @@ template: `<div>
 </div>`
 })
     
+        var searchApp = new Vue({
+el: '#searchFilter',
 
+data: {
+
+    page:'',
+     selectOne: '',
+
+},
+
+            });
 
         
         
