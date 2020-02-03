@@ -19,7 +19,7 @@
     
     
     
-    <h1>Search</h1>
+    <h1>Review 2.0</h1>
     
 <!--       <link rel="stylesheet" type="text/css" href="cc1css.css">-->
 
@@ -33,18 +33,8 @@
 <toplinks v-bind:page=page></toplinks>
 </div></center>
  <br> <br> <br>
-        <button v-on:click='showcourse()' class="button1">.................show me my available       courses .....................</button>
-    <br>
-     <br> <br>
 
-<!-- Search -->
-<input type="text" id="myInput" placeholder="Search" v-model='term'>
-<button v-on:click='reset' class="button button1">Reset</button>
-<button v-on:click='low2high' class="button button1" >Price (Assending)</button>
- <button v-on:click='hightolow' class="button button1" >Price (Dessending</button>
-     <button v-on:click='rating' class=" button button1" >Ratings</button>
-     <button v-on:click='alphabeticallyhigh2low' class=" button button1" >Alphabetically (Desending)</button>
-    <button v-on:click='alphabeticallyhightolow' class=" button button1" >Alphabetically (assending)</button>
+
     
 
 
@@ -54,159 +44,70 @@
     
 -->
     
-<h3>Use these fields to Update</h3>
-<input type="text" id="myInput" placeholder="topic" v-model='updatedTopic'>
-<input type="text" id="myInput" placeholder="location" v-model='updatedLocation'>
-<input type="text" id="myInput" placeholder="price" v-model='updatedPrice'>
+<h3>Update</h3>
+    <br>
+
 <input type="text" id="myInput" placeholder="rating" v-model='updatedRating'>
 <button v-on:click='updateItem' class=" button button1" >Update Item</button>
 
 
-<h3>Add Course</h3>
-<input type="text" id="myInput" placeholder="topic" v-model='topic'>
-<input type="text" id="myInput" placeholder="location" v-model='location'>
-<input type="text" id="myInput" placeholder="price" v-model='price'>
-<input type="text" id="myInput" placeholder="rating" v-model='ratingg'>
-<button v-on:click='addCourse' class=" button button1" >add Course</button>
+
+    
+    <br>  <br>  <br>
+        <select v-model="selectedtopic">
+  <option v-for="option in dbTable" v-bind:value="option.topic">
+    {{ option.topic }}
+  </option>
+</select>
+<span>Selected: {{ selectedtopic }}</span>
+    
+    
+        <select v-model="locationselect">
+  <option v-for="option in dbTable" v-bind:value="option.location">
+    {{ option.location }}
+  </option>
+</select>
+<span>Selected: {{ locationselect }}</span>
+    
+    
+    
+          <div v-for="option in options">
+  <input type="radio" v-model="stars" v-bind:value="option.value">
+  <label> {{ option.value }} </label>
+  </div>
+  <span>Rate this: {{ stars }} ★</span>
+    
+    <br>    <br>    
+    <button v-on:click='addCoursenew' class=" button button1" >Add My review</button>
+    <br>
 
 <h3>Database table</h3>
 <table id="myTable">
     <tr class="header">
       <th >Topic</th>
       <th >Location</th>
-      <th >Price</th>
+
       <th >Rating</th>
-      <th >Delete</th    >
+
       <th >Update</th>
     </tr>
     <tr v-for='course in dbTable' class='course'>
       <td >{{course.topic}}</td>
       <td >{{course.location}}</td>
-      <td >{{course.price}}</td>
+
       <td >{{course.rating}}</td>  
-      <td><button v-on:click='deleteItem(course.id)' class="button1">Delete</button></td>    
+
       <td><button v-on:click='Update(course.id,course.topic,course.location,course.price,course.rating)' class="button1">Update</button></td>    
     </tr>
 </table>
-    <h2>filter by provider</h2>
-    <button v-on:click='addjohn()' class=" button button1" >John</button>
-      <button v-on:click='addsteve()' class=" button button1" >Steve</button>
-     
-    <br>     <br>   
- 
-<table id="myTable">
-    <tr class="header">
-        
-      <th >Topic</th>
-      <th >Location</th>
-      <th >Price</th>
-      <th >Rating</th>
-     <th >provider</th>
-    <th >provider review</th>
- 
-      <th >Delete</th    >
-      <th >Update</th>
-    </tr>
-    <tr v-for='course in providerTable' class='course'>
-      <td >{{course.topic}}</td>
-      <td >{{course.location}}</td>
-      <td >{{course.price}}</td>
-      <td >{{course.rating}}</td>  
-      <td>{{course.provider}}</td>
-     <td>{{course.Providerreview}}</td>
-      <td><button v-on:click='deleteItem(course.id)' class="button1">Delete</button></td>    
-      <td><button v-on:click='Update(course.id,course.topic,course.location,course.price,course.rating)' class="button1">Update</button></td>    
-        
-        
-            <tr v-for='course in stevetable' class='course'>
-      <td >{{course.topic}}</td>
-      <td >{{course.location}}</td>
-      <td >{{course.price}}</td>
-      <td >{{course.rating}}</td>  
-      <td>{{course.provider}}</td>
-        <td>{{course.Providerreview}}</td>
-      <td><button v-on:click='deleteItem(course.id)' class="button1">Delete</button></td>    
-      <td><button v-on:click='Update(course.id,course.topic,course.location,course.price,course.rating)' class="button1">Update</button></td>    
-    </tr>
    
-    
-   
-</table>
 
     
   
 <br><br><br><br><br><br>
     <br><br><br><br><br><br>
 
-<h2>Filter</h2>
-<!-- filter -->
-<select multiple v-model='userLocations'>
-    <option v-for='location in locations'>
-    {{location}}
-    </option>
-</select>
 
-<br><br>
-    <br><br>
-<h2>Course Table</h2>
-<table id="myTable">
-  <tr class="header">
-    <th >Topic</th>
-    <th >Location</th>
-    <th >Price</th>
-    <th >Rating</th>
-      
-  </tr>
-  <tr v-for='course in results' class='course'>
-    <td>{{course.topic}}</td>
-    <td>{{course.location}}</td>
-    <td>{{course.price}}</td>
-    <td>{{course.rating}}</td>
-      
-    <td><button v-on:click='add2bucket(course.topic,course.location,course.price,course.rating)' class="button1">Add to Basket</button>
-<!--       <button @click="remove(index)">&times;</button>-->
-      </td>
-      
-  </tr>
-</table>
-<br/>
-
-<h2> Basket </h2>
-<table  id="content" id="mytable">
-    <tr class="basket">
-      <th style="width:20%;">Topic</th>
-      <th style="width:20%;">Location</th>
-      <th style="width:20%;">Price</th>
-      <th style="width:20%;">Ratiing</th>
- 
-
-    </tr>
-    <tr v-for='course in bucket' class='course'>
-      <td>{{course.topic}}</td>
-      <td>{{course.location}}</td>
-      <td>{{course.price}}</td>
-      <td>{{course.rating}}</td>
-  
-        
-      <td><button v-on:click='' class="button1">proceed to checkout</button></td>
-    </tr>
-  </table>
-<br/>
-
-
-</div>
-    
-    
-    
-
-     
-	<div class="container">
-
-
-<!--
-	<button id="notifications">notifications</button>
-	<section id="catched"></section>
--->
 
   </div>
 <script>
@@ -268,6 +169,14 @@ var courses = [
 
 //courses.pop()
 
+
+  selectstars =  [
+      { value: '1 ' },
+      { value: '2' },
+      { value: '3' },
+      { value: '4' },
+      { value: '5' }
+    ]  
    localStorage.setItem("courses", JSON.stringify(courses));    
 
 var courses = JSON.parse(localStorage.getItem("courses"));
@@ -288,6 +197,11 @@ newdbcollection:'', // //not using delete use other
 dbcollection:'',
 //test start
     Providerreview:'',
+    
+        stars: '',
+    options: selectstars,
+   selectedtopic: '',
+locationselect: '',
 topic:'',
 location:'',
 price:'',
@@ -307,168 +221,8 @@ this.userLocations = [];
     
 },
     
-      alphabeticallyhightolow: function() {
-          
-          
-          
-          
-          
-          
-          
-          
-    courses.sort(function(a, b){
-        const bandA = a.topic.toLowerCase();
-    const bandB = b.topic.toLowerCase();
-        
+  
 
-    let comparison = 0;
-    if (bandB > bandA) {
-        comparison = 1;
-    } else if (bandB < bandA) {
-        comparison = -1;
-    }
-    return comparison;
-});
-        
-this.userLocations = [];
-},
-    
-    alphabeticallyhigh2low: function() {
-    courses.sort(function(a, b){
-        const bandA = a.topic.toLowerCase();
-    const bandB = b.topic.toLowerCase();
-        
-
-    let comparison = 0;
-    if (bandA > bandB) {
-        comparison = 1;
-    } else if (bandA < bandB) {
-        comparison = -1;
-    }
-    return comparison;
-});
-        
-this.userLocations = [];
-},
-    
-    
-        addsteve: function() {
-//fetching all courses from database on page load
-fetch(API+'/steve/'+'courses', {
-  method:'GET',
-  headers: {  "Content-Type": "application/json; charset=utf-8" },
-}).then(res => res.json())
-  .then(jsonData => {
-          jsonData.forEach(element => {
-            let newItemsteve = {
-            id: element._id,
-           topic: element.topic,
-           location: element.location,
-           price: element.price,
-           rating: element.rating,
-           provider: element.Provider,
-                 Providerreview: element.Providerreview
-      
-         
-        };
-
-        this.stevetable.push(newItemsteve);
-       
-          });
-  })
-    .catch((err) => {
-    console.log(err)
-})
-},
-    addjohn: function() {
-//fetching all courses from database on page load
-fetch(API+'/john/'+'courses', {
-  method:'GET',
-  headers: {  "Content-Type": "application/json; charset=utf-8" },
-}).then(res => res.json())
-  .then(jsonData => {
-          jsonData.forEach(element => {
-            let newItemd = {
-            id: element._id,
-           topic: element.topic,
-           location: element.location,
-           price: element.price,
-           rating: element.rating,
-           provider: element.Provider,
-        Providerreview: element.Providerreview
-      
-         
-        };
-
-        this.providerTable.push(newItemd);
-       
-          });
-  })
-    .catch((err) => {
-    console.log(err)
-})
-},
-    
-
-    
-rating: function() {
-    courses.sort(function(a, b){
-        const bandA = a.rating;
-    const bandB = b.rating;
-
-    let comparison = 0;
-    if (bandB > bandA) {
-        comparison = 1;
-    } else if (bandB < bandA) {
-        comparison = -1;
-    }
-    return comparison;
-});
-this.userLocations = [];
-},
-    
-hightolow: function() {
-    courses.sort(function(a, b){
-        const bandA = a.price;
-    const bandB = b.price;
-
-    let comparison = 0;
-    if (bandB > bandA) {
-        comparison = 1;
-    } else if (bandB < bandA) {
-        comparison = -1;
-    }
-    return comparison;
-});
-this.userLocations = [];
-},
-
-low2high: function() {
-    courses.sort(function(a, b){
-        const bandA = a.price;
-    const bandB = b.price;
-
-    let comparison = 0;
-    if (bandA > bandB) {
-        comparison = 1;
-    } else if (bandA < bandB) {
-        comparison = -1;
-    }
-    return comparison;
-});
-this.userLocations = [];
-},
-
-add2bucket: function(topic,location,price,rating) {
-        let newItem = {
-           topic: topic,
-           location: location,
-           price: price,
-           rating: rating
-        };
-
-        this.bucket.push(newItem);
-},
     
     
     
@@ -486,17 +240,35 @@ createCollection: function(){
       console.log(err)
   })
 },
+//
+//addCourse: function() {
+//
+//  fetch(API+'/collections/'+'courses', {
+//  headers: {  "Content-Type": "application/json; charset=utf-8" },
+//  method: 'post',
+//  body: JSON.stringify({
+//        topic: this.topic,
+//        location: this.location,
+//        price: this.price,
+//        rating: this.ratingg,
+//    })
+//  }).then((res)=>{
+//    window.location.reload()
+//  }).catch((err)=>{
+//      console.log(err)
+//  })
+//},
+    
+    
+    addCoursenew: function() {
 
-addCourse: function() {
-
-  fetch(API+'/review/'+'rating', {
+  fetch(API+'/collections/'+'courses', {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'post',
   body: JSON.stringify({
-        topic: this.topic,
-        location: this.location,
-        price: this.price,
-        rating: this.ratingg,
+             topic: this.selectedtopic,
+        location: this.locationselect,
+        rating: this.stars,
     })
   }).then((res)=>{
     window.location.reload()
@@ -508,7 +280,7 @@ addCourse: function() {
     
 showcourse: function() {
 
-  fetch(API+'/review/'+'rating', {
+  fetch(API+'/addcourses/'+'courses', {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'post',
 
@@ -524,7 +296,7 @@ showcourse: function() {
 
 
 deleteItem: function(id) {
-    fetch(API+'/review/'+'rating'+ id, {
+    fetch(API+'/collections/'+'courses/'+ id, {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'delete',
   }).then((res)=>{
@@ -543,7 +315,7 @@ Update: function(id,topic,location,price,rating) {
 },
 
 updateItem: function() {
-    fetch(API+'/review/'+'rating'+ this.itemID, {
+    fetch(API+'/collections/'+'courses/'+ this.itemID, {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'put',
   body: JSON.stringify({
@@ -566,7 +338,7 @@ updateItem: function() {
     
 created() {
 //fetching all courses from database on page load
-fetch(API+'/review/'+'rating', {
+fetch(API+'/collections/'+'courses', {
   method:'GET',
   headers: {  "Content-Type": "application/json; charset=utf-8" },
 }).then(res => res.json())
