@@ -7,6 +7,7 @@
     <script> src="/app.js" </script>
     
     
+    
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta property="og:image" content="icons/icon-512.png">
 	<link rel="shortcut icon" href="favicon.ico">
@@ -14,9 +15,47 @@
 	<link rel="manifest" href="website.webmanifest">
 	<script src="data/courses.js" defer></script>
 	<script src="app.js" defer></script>
+        <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
         
 <body>
 
+    <div id="searchFilter">
+<h1>PWA</h1>
+        <center>
+            <div id="navigation">
+                <toplinks v-bind:page=page></toplinks>
+            </div>
+        </center>
+
+    </div>
+    
+     <script>
+
+
+        Vue.component('toplinks', {
+            props: ['page'],
+            template: `<div>
+<a href='registerlastest.html' v-bind:class="{active: page==='home'}">Register</a>
+<a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
+<a href='review.html' v-bind:class="{active: page==='userpage'}">Review</a>
+<a href='index.html' v-bind:class="{active: page==='course'}">Login</a>
+<a href='progressive.html' v-bind:class="{active: page==='course'}">catched</a>
+</div>`
+        })
+        
+        var searchApp = new Vue({
+            el: '#searchFilter',
+
+            data: {
+
+
+                page: ''
+
+            },
+
+
+        })
+    </script>
 
     
     	<div class="container">

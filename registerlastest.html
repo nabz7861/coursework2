@@ -232,9 +232,29 @@ var test = exp.test(string);
 
     
     
-    
-if (users) {
-if (users.some(function (user) { return user.email === newEmail })) {
+ 
+//       fetch(API+'/users/'+'register', {
+//  method:'GET',
+//  headers: {  "Content-Type": "application/json; charset=utf-8" },
+//}).then(res => res.json())
+//  .then(jsonData => {
+//          jsonData.forEach(element => {
+//            let newItem = {
+//            id: element._id,
+//           topic: element.topic,
+//           location: element.location};
+//              
+//              
+//
+//      
+//       
+//          });
+//  })
+        
+        
+        
+if (this.newItem) {
+if (this.newItem.some(function (user) { return user.email === newEmail })) {
 alert('Email already exists!');
 return;
 }
