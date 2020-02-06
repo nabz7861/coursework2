@@ -148,6 +148,18 @@ app.get('/review/:collectionName', (req, res,next) => {
     });
 })
 
+
+app.put('/review/:collectionName/:id', (req, res, next) => {
+    var newval = { $set: { topic: req.body.topic, location: req.body.location,
+        price: req.body.price, rating: req.body.rating} };
+    dbo.collection(req.params.collectionName).updateOne({ _id: ObjectId(req.params.id) },
+    newval,
+    { safe: true, multi: false }, (e, result) => {
+    if (e) return next(e)
+    res.send((result.result.n === 1) ? { msg: 'success' } : { msg: 'error' })
+    })
+})
+
 app.put('/collections/:collectionName/:id', (req, res, next) => {
     var newval = { $set: { topic: req.body.topic, location: req.body.location,
         price: req.body.price, rating: req.body.rating} };

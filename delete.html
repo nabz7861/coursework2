@@ -264,7 +264,7 @@ createCollection: function(){
     
     addCoursenew: function() {
 
-  fetch(API+'/collections/'+'courses', {
+  fetch(API+'/review/'+'rating', {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'post',
   body: JSON.stringify({
@@ -282,7 +282,7 @@ createCollection: function(){
     
 showcourse: function() {
 
-  fetch(API+'/addcourses/'+'courses', {
+  fetch(API+'/review/'+'rating', {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'post',
 
@@ -298,7 +298,7 @@ showcourse: function() {
 
 
 deleteItem: function(id) {
-    fetch(API+'/collections/'+'courses/'+ id, {
+    fetch(API+'/review/'+'rating/'+ id, {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'delete',
   }).then((res)=>{
@@ -317,7 +317,7 @@ Update: function(id,topic,location,price,rating) {
 },
 
 updateItem: function() {
-    fetch(API+'/collections/'+'courses/'+ this.itemID, {
+    fetch(API+'/review/'+'rating/'+ this.itemID, {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'put',
   body: JSON.stringify({
@@ -340,7 +340,7 @@ updateItem: function() {
     
 created() {
 //fetching all courses from database on page load
-fetch(API+'/collections/'+'courses', {
+fetch(API+'/review/'+'rating', {
   method:'GET',
   headers: {  "Content-Type": "application/json; charset=utf-8" },
 }).then(res => res.json())
