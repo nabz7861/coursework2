@@ -58,9 +58,18 @@
 
 
         })
+        
+const vueapp = new Vue({
+el: '#content',
+data: {
+courses: courses
+}
+})
+        
     </script>
 
     
+<!--
     	<div class="container">
 
 
@@ -68,6 +77,23 @@
 	<section id="catched"></section>
 
   </div>
+-->
+    <section id="content">
+<article v-for="course in courses">
+<img :src="'data/img/'+course.slug+'.jpg'" :alt="course.name">
+<h3>{{course.name}}</h3>
+<ul>
+
+<li>Twitter: <a :href="'https://twitter/' + game.twitter">@{{course.topic}}</a></li>
+<li>Website: <a :href="'http://' + course.website">{{course.location}}</a>
+</li>
+<li>GitHub: <a :href="'https://' + course.github">{{course.price}}</a></
+li>
+
+</ul>
+</article>
+</section>
+
     
     
 

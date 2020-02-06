@@ -1,28 +1,28 @@
-// Generating content based on the template
-var template = "<article>\n\
-	<img src='data/img/placeholder.png' data-src='data/img/SLUG.jpg' alt='NAME'>\n\
-	<h3>NAME</h3>\n\
-	<ul>\n\
-	<li><span>course-Price:</span> <strong> price</strong></li>\n\
-	<li><span>courseTopic:</span> topic</a></li>\n\
-	<li><span>review:</span> rating</a></li>\n\
-	<li><span>location</span> locate</a></li>\n\
-	\n\
-	</ul>\n\
-</article>";
-var catched = '';
-for(var i=0; i<courses.length; i++) {
-	var entry = template.replace(/POS/g,(i+1))
-		.replace(/SLUG/g,courses[i].slug)
-		.replace(/NAME/g,courses[i].name)
-		.replace(/price/g,courses[i].price)
-		.replace(/topic/g,courses[i].topic)
-		.replace(/rating/g,courses[i].rating)
-		.replace(/locate/g,courses[i].locate);
-	entry = entry.replace('<a href=\'http:///\'></a>','-');
-	catched += entry;
-};
-document.getElementById('catched').innerHTML = catched;
+//// Generating content based on the template
+//var template = "<article>\n\
+//	<img src='data/img/placeholder.png' data-src='data/img/SLUG.jpg' alt='NAME'>\n\
+//	<h3>NAME</h3>\n\
+//	<ul>\n\
+//	<li><span>course-Price:</span> <strong> price</strong></li>\n\
+//	<li><span>courseTopic:</span> topic</a></li>\n\
+//	<li><span>review:</span> rating</a></li>\n\
+//	<li><span>location</span> locate</a></li>\n\
+//	\n\
+//	</ul>\n\
+//</article>";
+//var catched = '';
+//for(var i=0; i<courses.length; i++) {
+//	var entry = template.replace(/POS/g,(i+1))
+//		.replace(/SLUG/g,courses[i].slug)
+//		.replace(/NAME/g,courses[i].name)
+//		.replace(/price/g,courses[i].price)
+//		.replace(/topic/g,courses[i].topic)
+//		.replace(/rating/g,courses[i].rating)
+//		.replace(/locate/g,courses[i].locate);
+//	entry = entry.replace('<a href=\'http:///\'></a>','-');
+//	catched += entry;
+//};
+//document.getElementById('catched').innerHTML = catched;
 
 // Registering Service Worker
 if('serviceWorker' in navigator) {
