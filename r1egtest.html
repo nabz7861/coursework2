@@ -67,24 +67,7 @@
            <p id="err">
                
     </center>
-<!--
-<h3>Your Reviews</h3>
-<table id="myTable">
-    <tr class="header">
-      <th >email</th>
-      <th >password</th>
 
-    </tr>
-    <tr v-for='course in dbTable' class='course'>
-      <td >{{course.topic}}</td>
-      <td >{{course.location}}</td>
--->
-
-       
-
-<!--</table>-->
-    
-    
 
     <br>     <br>   
  
@@ -113,11 +96,11 @@ template: `<div>
 <a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
 
 <a href='review.html' v-bind:class="{active: page==='userpage'}">Review</a>
-<a href='r1egtest.html' v-bind:class="{active: page==='userpage'}">user-login</a>
+
+<a href='r1egtest.html' v-bind:class="{active: page==='userpage'}">thislogin</a>
 
 
-
-<a href='login.html' v-bind:class="{active: page==='course'}">site</a>
+<a href='login.html' v-bind:class="{active: page==='course'}">notworking</a>
 </div>`
 })
     
@@ -234,23 +217,7 @@ var test = exp.test(string);
     
     
  
-//       fetch(API+'/users/'+'register', {
-//  method:'GET',
-//  headers: {  "Content-Type": "application/json; charset=utf-8" },
-//}).then(res => res.json())
-//  .then(jsonData => {
-//          jsonData.forEach(element => {
-//            let newItem = {
-//            id: element._id,
-//           topic: element.topic,
-//           location: element.location};
-//              
-//              
-//
-//      
-//       
-//          });
-//  })
+
         
         
         
@@ -308,6 +275,32 @@ addCourse: function() {
         alert('Recheck details');
         return;
     }
+    
+    fetch('http://localhost:3000'+'/users/'+'register', {
+  method:'GET',
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+})  .then((response) => {
+    return response.json();
+  })
+  .then((myJson) => {
+    console.log(myJson);
+  });
+    
+   
+    
+    if (this.myJson.some(function (used) { return used.email === this.topic })) {
+alert('Email already exists!');
+return;
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
       var string = this.topic
 var exp = /(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i
