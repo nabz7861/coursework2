@@ -3,9 +3,23 @@
 
 <body><script type="text/javascript" ></script>
 <script src="https://unpkg.com/vue"></script>    
-        <link rel="stylesheet" type="text/css" href="cc1css.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    <h1>Review</h1>
+      <link rel="stylesheet" type="text/css" href="cc1css.css">
+<!--    <script> src="/app.js" </script>-->
+    
+    
+<!--
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta property="og:image" content="icons/icon-512.png">
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" href="style.css">
+	<link rel="manifest" href="website.webmanifest">
+	<script src="data/courses.js" defer></script>
+	<script src="app.js" defer></script>
+-->
+    
+    
+    
+    <h1>Review 2.0</h1>
     
 <!--       <link rel="stylesheet" type="text/css" href="cc1css.css">-->
 
@@ -13,14 +27,15 @@
     <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
 
 <div id="searchFilter">
-   <center><div id="navigation">
+    
+
+        <center><div id="navigation">
 <toplinks v-bind:page=page></toplinks>
 </div></center>
  <br> <br> <br>
-     
 
-<!-- Search -->
 
+    
 
 
 <!--<input type="text" id="myInput" placeholder="collection name" v-model='newdbcollection'>-->
@@ -29,25 +44,16 @@
     
 -->
     
-<h3>Use these fields to Update your Review</h3>
-<input type="text" id="myInput" placeholder="topic" v-model='updatedTopic'>
-<input type="text" id="myInput" placeholder="location" v-model='updatedLocation'>
-<input type="text" id="myInput" placeholder="price" v-model='updatedPrice'>
+<h3>Update</h3>
+    <br>
+
 <input type="text" id="myInput" placeholder="rating" v-model='updatedRating'>
 <button v-on:click='updateItem' class=" button button1" >Update Item</button>
 
-<br>
-<br>
-    <br>
-<br>
-
 
 
     
-
-    
-
-    
+    <br>  <br>  <br>
         <select v-model="selectedtopic">
   <option v-for="option in dbTable" v-bind:value="option.topic">
     {{ option.topic }}
@@ -72,64 +78,40 @@
   <span>Rate this: {{ stars }} ★</span>
     
     <br>    <br>    
-    <button v-on:click='addCourse' class=" button button1" >Add My review</button>
+    <button v-on:click='addCoursenew' class=" button button1" >Add My review</button>
     <br>
-    
-    <h3>Your Reviews</h3>
-<table id="myTable">
-    <tr class="header">
-      <th >Topic</th>
-      <th >Location</th>
-      <th >Rating</th>  
-      <th >Update</th>
-    </tr>
-    <tr v-for='course in review' class='course'>
-      <td >{{course.topic}}</td>
-      <td >{{course.location}}</td>
-      <td >{{course.rating}}</td>  
-       
-      <td><button v-on:click='Update(course.id,course.topic,course.location,course.price,course.rating)' class="button1">Update</button></td>    
-    </tr>
-</table>
-    
-    <Br>
 
-<h3>Available courses to review</h3>
+<h3>Database table</h3>
 <table id="myTable">
     <tr class="header">
       <th >Topic</th>
       <th >Location</th>
-            <th >  </th>
-             <th >  </th>
-        
-      <th >Overall Ratings</th>  
-     
+
+      <th >Rating</th>
+
+      <th >Update</th>
     </tr>
     <tr v-for='course in dbTable' class='course'>
       <td >{{course.topic}}</td>
       <td >{{course.location}}</td>
-          <td >     </td>
-                 <td >     </td>
+
       <td >{{course.rating}}</td>  
-       
-      <td></td>    
+
+      <td><button v-on:click='Update(course.id,course.topic,course.location,course.price,course.rating)' class="button1">Update</button></td>    
     </tr>
 </table>
-
-    <br>     <br>   
-
-
    
-    
 
     
   
 <br><br><br><br><br><br>
     <br><br><br><br><br><br>
 
-</div>
-  
+
+
+  </div>
 <script>
+    
     
          Vue.component('toplinks', {
 props: ['page'],
@@ -139,11 +121,12 @@ template: `<div>
 <a href='courses23JAN.html' v-bind:class="{active: page==='userpage'}">Courses</a>
 
 <a href='review.html' v-bind:class="{active: page==='userpage'}">Review</a>
-<a href='delete.html' v-bind:class="{active: page==='userpage'}">Review-2.0</a>
+<a href='catchme.html' v-bind:class="{active: page==='userpage'}">catchme</a>
 <a href='r1egtest.html' v-bind:class="{active: page==='userpage'}">user-login</a>
 
 
 <a href='login.html' v-bind:class="{active: page==='course'}">site</a>
+
 </div>`
 })
 
@@ -187,17 +170,15 @@ var courses = [
 
 //courses.pop()
 
-   localStorage.setItem("courses", JSON.stringify(courses)); 
-    
-    
-          
-    selectstars =  [
+
+  selectstars =  [
       { value: '1 ' },
       { value: '2' },
       { value: '3' },
       { value: '4' },
       { value: '5' }
     ]  
+   localStorage.setItem("courses", JSON.stringify(courses));    
 
 var courses = JSON.parse(localStorage.getItem("courses"));
   
@@ -208,22 +189,20 @@ data: {
 checkto: true,
 term: '',
 bucket:[],
- selectedtopic: '',
-locationselect: '',
-    
-    stars: '',
-    options: selectstars,
-  
 dbTable:[],
+    page:'',
 stevetable:[],
 providerTable:[],
 userLocations: [],
-review:[],
-newdbcollection:'',
-    page:'',
+newdbcollection:'', // //not using delete use other
 dbcollection:'',
 //test start
-Providerreview:'',
+    Providerreview:'',
+    
+        stars: '',
+    options: selectstars,
+   selectedtopic: '',
+locationselect: '',
 topic:'',
 location:'',
 price:'',
@@ -243,11 +222,12 @@ this.userLocations = [];
     
 },
     
-     
+  
+
+    
     
     
 
-    
 createCollection: function(){
 
   fetch(API+'/createCollection', {
@@ -261,8 +241,27 @@ createCollection: function(){
       console.log(err)
   })
 },
-
-addCourse: function() {
+//
+//addCourse: function() {
+//
+//  fetch(API+'/collections/'+'courses', {
+//  headers: {  "Content-Type": "application/json; charset=utf-8" },
+//  method: 'post',
+//  body: JSON.stringify({
+//        topic: this.topic,
+//        location: this.location,
+//        price: this.price,
+//        rating: this.ratingg,
+//    })
+//  }).then((res)=>{
+//    window.location.reload()
+//  }).catch((err)=>{
+//      console.log(err)
+//  })
+//},
+    
+    
+    addCoursenew: function() {
 
   fetch(API+'/review/'+'rating', {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
@@ -278,9 +277,27 @@ addCourse: function() {
       console.log(err)
   })
 },
+    
+    
+showcourse: function() {
+
+  fetch(API+'/review/'+'rating', {
+  headers: {  "Content-Type": "application/json; charset=utf-8" },
+  method: 'post',
+
+      
+  }).then((res)=>{
+    window.location.reload()
+  }).catch((err)=>{
+      console.log(err)
+  })
+},
+    
+    
+
 
 deleteItem: function(id) {
-    fetch(API+'/collections/'+'courses/'+ id, {
+    fetch(API+'/review/'+'rating/'+ id, {
   headers: {  "Content-Type": "application/json; charset=utf-8" },
   method: 'delete',
   }).then((res)=>{
@@ -297,13 +314,6 @@ Update: function(id,topic,location,price,rating) {
   this.updatedRating = rating;
   this.itemID = id;
 },
-    
-    
-    
-    
-    
-    
-    
 
 updateItem: function() {
     fetch(API+'/review/'+'rating/'+ this.itemID, {
@@ -325,36 +335,11 @@ updateItem: function() {
 },
     
     
+
+    
 created() {
-    
-    
-    
-        fetch(API+'/review/'+'rating', {
-  method:'GET',
-  headers: {  "Content-Type": "application/json; charset=utf-8" },
-}).then(res => res.json())
-  .then(jsonData => {
-          jsonData.forEach(element => {
-            let bits = {
-            id: element._id,
-           topic: element.topic,
-           location: element.location,
-           price: element.price,
-           rating: element.rating
-                
-     
-        
-            
-            };
-  
-        this.review.push(bits);
-
-
-   
-          });
-  })   
 //fetching all courses from database on page load
-fetch(API+'/collections/'+'courses', {
+fetch(API+'/review/'+'rating', {
   method:'GET',
   headers: {  "Content-Type": "application/json; charset=utf-8" },
 }).then(res => res.json())
@@ -364,31 +349,41 @@ fetch(API+'/collections/'+'courses', {
             id: element._id,
            topic: element.topic,
            location: element.location,
-    
+           price: element.price,
            rating: element.rating
                 
-     
+        
         };
-  
+
         this.dbTable.push(newItem);
-
-
-   
+       
           });
-    
-    
-    
   })
     .catch((err) => {
     console.log(err)
 })
-    
-    
-    
-    
 },
 
-  
+
+
+computed: {
+locations: function () {
+// update option list
+return [...new Set(this.results.map(x => x.location))]
+},
+results: function () {
+return courses.filter(course => {
+// search condition
+var searchCourse = course.topic.includes(this.term);
+// filter condition
+var filterCourse = this.userLocations.length == 0 ||
+this.userLocations.includes(course.location);
+// combine the result
+return searchCourse && filterCourse;
+})
+},
+},
+    
 });
 
 </script>
