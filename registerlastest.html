@@ -60,6 +60,9 @@
   <span>you are a {{ selectOne }}</span>
          <br>     <br> 
 </section>
+    
+    
+    
 
     <br>    
 <button v-on:click='addCourse' class=" button button1" >login</button>
@@ -68,7 +71,17 @@
         
            <p id="err">
                
+               
+               
+               
     </center>
+        
+               
+
+   
+        
+        
+        
 <!--
 <h3>Your Reviews</h3>
 <table id="myTable">
@@ -98,8 +111,24 @@
   
 <br><br><br><br><br><br>
     <br><br><br><br><br><br>
+        
+                <h3>Lastest logged user</h3>
+<table id="myTable">
+    <tr class="header">
+   
+
+    </tr>
+    <tr v-for='course in dbTable' class='course'>
+      <td >{{course.topic}}</td>
+   
+
+     
+    </tr>
+</table>
 
 </div>
+    
+    
   
 <script>
     

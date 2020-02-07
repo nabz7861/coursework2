@@ -190,19 +190,25 @@ app.post('/users/:collectionName', (req, res, next) => {
 })
 
 
-
-
-
-
-
 // colection GET for users reg
 app.get('/users/:collectionName', (req, res,next) => {
+    var collectionName = req.params.collectionName
+    dbo.collection(collectionName).find({}).sort({_id:-1}).limit(1).toArray(function(err, result) {
+    if (err) throw err;
+    res.json(result)
+    });
+})
+
+//login
+app.get('/login/:collectionName', (req, res,next) => {
     var collectionName = req.params.collectionName
     dbo.collection(collectionName).find({}).toArray(function(err, result) {
     if (err) throw err;
     res.json(result)
     });
 })
+
+
 
 
 // retrieve all the objects from an collection
@@ -216,6 +222,7 @@ app.get('/collections/:collectionName', (req, res,next) => {
 
 
 //http://localhost:3000/john/courses test  // retrieve all the objects from an collection for john
+
 app.get('/john/:collectionName', (req, res,next) => {
     var collectionName = req.params.collectionName
     dbo.collection(collectionName).find({Provider: "john"}).toArray(function(err, result) {
